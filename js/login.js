@@ -31,7 +31,7 @@ class UI {
     divMensaje.innerHTML = mensaje;
 
     //Agregar al DOM
-    document.querySelector('#').insertBefore(divMensaje, document.querySelector('#'))
+    //document.querySelector('#').insertBefore(divMensaje, document.querySelector('#'))
 
   }
 }
@@ -39,13 +39,14 @@ class UI {
 const ui = new UI();
 
 
-//Registrar de eventos
+//Registro de eventos
 eventListeners();
 function eventListeners() {
   usuarioInput.addEventListener('input', datosUsuario);
   contrasenaInput.addEventListener('input', datosUsuario);
 
   formulario.addEventListener('submit', login);
+
 }
 
 const usuarioObj = {
@@ -65,11 +66,24 @@ function login(e) {
   //Extrae la información del usuario del form
   const { usuario, contrasena } = usuarioObj;
 
-  //validar
+  /* //validar
   var expreg= /(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{5,20}/;
   if (expreg.test(contrasenaInput.value)) {
     ui.imprimirAlerta('No cumple con los criterios', 'error');
     return;
-  }
-  
+  } */
+
+  //Iniciando sesión
+  const data = new FormData(document.getElementById('login'));
+  fetch('controllers/control-usuario.php', {
+    method: 'POST',
+    body: data
+  })
+    .then(function(response) {
+      console.log(response.url);
+      location.href = response.url;
+    })
+    .catch(function(err) {
+      console.log(err);
+    });
 }

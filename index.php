@@ -29,7 +29,7 @@
 
         <!-- CUERPO DEL RECUADRO DE LOGIN -->
         <div class="body-login">
-          <form id="login" action="controllers/control-usuario.php" name="form1" method="post">
+          <form id="login" name="form1" method="post">
             <input type="hidden" name="webService" value="validarInicioSesion" />
             <input type="hidden" name="url" value="../views/home.php" />
 
