@@ -31,7 +31,8 @@
         <div class="body-login">
           <form id="login" name="form1" method="post">
             <input type="hidden" name="webService" value="validarInicioSesion" />
-            <input type="hidden" name="url" value="../views/home.php" />
+            <input type="hidden" id="url" name="url" value="../views/home.php" />
+            <div id="mensaje"></div>
 
             <div class="input-group">
               <span class="input-group-addon btn-sm"><i class="glyphicon glyphicon-user"></i></span>
