@@ -1,12 +1,12 @@
 //Campos del formulario
-const usuarioInput = document.querySelector('#usuario');
-const contrasenaInput = document.querySelector('#contrasena');
+const usuarioInput = document.getElementById('usuario');
+const contrasenaInput = document.getElementById('contrasena');
 
-const url = document.querySelector('#url');
+const url = document.getElementById('url');
 
 
 //UI
-const formulario = document.querySelector('#login');
+const formulario = document.getElementById('login');
 
 class UI {
   imprimirMensaje() {
@@ -43,7 +43,7 @@ function login(e) {
     body: data
   })
     .then(function(response) {
-      console.log(response);
+      console.log(response.url);
       location.href = response.url;
     })
     .catch(function(err) {
