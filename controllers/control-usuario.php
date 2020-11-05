@@ -283,10 +283,13 @@
         }
       }
       // Registro en bitacora
-      $bitacora = new Bitacora();
+      /*  $bitacora = new Bitacora();
       $usuarioId= isset($_SESSION["id"])?$_SESSION["id"]:-1;
       $bitacora->setAttributes(["usuario_id"=>$usuarioId,"entidad"=>"usuarios","accion"=>"registro","lugar"=>"control-usuario"]);
-      $result = $bitacora->guardar();
+      $result = $bitacora->guardar(); */
+      echo "webService registro";
+      print_r($resultado);
+      print_r($_POST);
       retornarWebService( $_POST['url'], $resultado );
     }
 

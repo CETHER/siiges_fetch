@@ -10,6 +10,7 @@ const btnRegistrarse = document.getElementById('registro-btnRegistrarse');
 const instruccionesContrasena = document.getElementById('instrucciones_contrasena');
 const instruccionesContrasena2 = document.getElementById('instrucciones_contrasena2');
 const btnAceptar = document.getElementById('registro-btnAceptar');
+const cargando = document.getElementById('cargando');
 
 const url = document.getElementById('url');
 const webService = document.getElementById('webService');
@@ -22,45 +23,41 @@ const formulario = document.getElementById('registro-formulario');
 class Usuario {
 
   constructor() {
-    //Objeto con la información del Usuario
   }
-
 
   //Agrega datos al objeto de usuario
   datosUsuario(e) {
     usuarioObj[e.target.name] = e.target.value;
-    console.log(usuarioObj);
   }
-  
 
+  //Valida y agrega un nuevo usuario a la clase Usuario
   registrarUsuario(e){
-    //Valida y agrega un nuevo usuario a la clase Usuario
     e.preventDefault();
-  
-    //Extraer la información del objeto de usuario
-    const {usuario, correo, contrasena, confirmacionContrasena} = usuarioObj;
-    
-    const data = new FormData();
-    data.append('webService', webService.value);
-    data.append('url', url.value);
-    data.append('usuario', usuarioObj.usuario);
-    data.append('correo', usuarioObj.correo);
-    data.append('contrasena', usuarioObj.contrasena);
-    fetch('controllers/control-usuario.php', {
-      method: 'post',
-      body: data
-    })
-      .then(function(response) {
-        console.log(response);
-        location.href = response.url;
-    })
-      .catch(function(err) {
-        console.log(err);
-    });
-  }
 
-  
-  
+    ui.mostrarCargando();
+    setTimeout(() => {
+      //Extraer la información del objeto de usuario
+      const {usuario, correo, contrasena, confirmacionContrasena} = usuarioObj;
+      
+      const data = new FormData();
+      data.append('webService', webService.value);
+      data.append('url', url.value);
+      data.append('usuario', usuarioObj.usuario);
+      data.append('correo', usuarioObj.correo);
+      data.append('contrasena', usuarioObj.contrasena);
+      fetch('controllers/control-usuario.php', {
+        method: 'post',
+        body: data
+      })
+        .then(response => {
+          return response.url;
+        })
+        .then(resultado => {
+          location.href = resultado;
+        })
+        .catch(err => console.log(err));
+    }, 1500);
+  }
 }
 
 class UI {
@@ -73,9 +70,11 @@ class UI {
     if (chkTerminos.checked==true ) {
       btnRegistrarse.classList.remove('disabled');
       btnRegistrarse.classList.add('active');
+      btnRegistrarse.removeAttribute("disabled");
     } else {
       btnRegistrarse.classList.remove('active');
       btnRegistrarse.classList.add('disabled');
+      btnRegistrarse.setAttribute("disabled", "");
     }
   }
 
@@ -146,6 +145,13 @@ class UI {
         txt.innerHTML= 'Contraseñas correctas';
       }
     }
+  }
+
+  mostrarCargando() {
+    cargando.classList.add('loader');
+    btnRegistrarse.classList.remove('active');
+    btnRegistrarse.classList.add('disabled');
+    btnRegistrarse.setAttribute("disabled", "");
   }
 }
 

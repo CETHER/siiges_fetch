@@ -27,6 +27,7 @@
 	<link rel="stylesheet" type="text/css" href="css/estilos.css">
 </head>
 <body class="fondo-imagen">
+	
   <!-- HEADER Y BARRA DE NAVEGACION -->
   <?php require_once "menu.php"; ?>
 
@@ -95,7 +96,7 @@
 						<!-- BOTON DE REGISTRO -->
 						<div class="form-group row">
 							<div class="col-sm-12">
-								<button id="registro-btnRegistrarse" type="submit" class="btn btn-primary btn-sm btn-block disabled" >Registrarme</button>
+								<button id="registro-btnRegistrarse" type="submit" class="btn btn-primary btn-sm btn-block disabled" disabled >Registrarme</button>
 							</div>
 						</div>
 					</form>
@@ -141,6 +142,8 @@
 			</div>
 		</section>
 	</div>
+	<div id="cargando" >
+
 
   <!-- JS DE GOB.MX -->
 	<script src="https://framework-gb.cdn.gob.mx/gobmx.js"></script>
